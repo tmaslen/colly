@@ -1,0 +1,37 @@
+{
+  "name": "polly",
+  "version": "0.0.0",
+  "description": "Another serverless framework for AWS Lambda and API Gateway",
+  "main": "./lib/index.js",
+  "dependencies": {
+    "archiver":           "latest",
+    "aws-sdk":            "latest",
+    "chalk":              "latest",
+    "command-line-args":  "latest",
+    "console.table":      "latest",
+    "fs-extra":           "latest",
+    "node-cmd":           "latest",
+    "xml2js":             "0.4.17",
+    "moment":             "latest",
+    "mocha":              "*",
+    "chai":               "*",
+    "glob-fs":            "0.1.*",
+    "prompt":             "1.0.*"
+  },
+  "bin": {
+    "localinclude": "bin/colly.js"
+  },
+  "scripts": {
+    "test": "colly"
+  },
+  "contributors": [{
+    "name": "Tom Maslen",
+    "email": "tom_maslen@hotmail.com"
+  }],
+  "license": "Apache-2.0",
+  "preferGlobal": "true",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tmaslen/colly"
+  }
+}
