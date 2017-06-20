@@ -1,1 +1,0 @@
-console.log( "Reserving the name on NPM. More to come soon." );

@@ -1,37 +1,32 @@
 {
   "name": "colly",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Another serverless framework for AWS Lambda and API Gateway",
   "main": "./lib/index.js",
-  "dependencies": {
-    "archiver":           "latest",
-    "aws-sdk":            "latest",
-    "chalk":              "latest",
-    "command-line-args":  "latest",
-    "console.table":      "latest",
-    "fs-extra":           "latest",
-    "node-cmd":           "latest",
-    "xml2js":             "0.4.17",
-    "moment":             "latest",
-    "mocha":              "*",
-    "chai":               "*",
-    "glob-fs":            "0.1.*",
-    "prompt":             "1.0.*"
-  },
+  "dependencies": {},
   "bin": {
-    "localinclude": "bin/colly.js"
+    "colly": "bin/colly"
   },
   "scripts": {
-    "test": "colly"
+    "colly": "bin/colly",
+    "test": "./node_modules/mocha/bin/mocha"
   },
-  "contributors": [{
-    "name": "Tom Maslen",
-    "email": "tom_maslen@hotmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Tom Maslen",
+      "email": "tom_maslen@hotmail.com"
+    }
+  ],
   "license": "Apache-2.0",
   "preferGlobal": "true",
   "repository": {
     "type": "git",
     "url": "https://github.com/tmaslen/colly"
+  },
+  "devDependencies": {
+    "chai": "^4.0.2",
+    "commander": "^2.9.0",
+    "fs-extra": "^3.0.1",
+    "mocha": "^3.4.2"
   }
 }

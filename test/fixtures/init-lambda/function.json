@@ -1,0 +1,12 @@
+{
+	"memorySize": 128,
+	"name": "",
+	"description": "",
+	"handler": "queueWorker/index.handler",
+	"runtime": "nodejs6.10",
+	"timeout": 3,
+	"userDefinedCodeToDeploy": [],	
+    "deployedAssets": {
+ 	    "live": {}
+    }
+}

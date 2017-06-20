@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+
+console.log( "Initialising a new lambda..." );
+
+program
+	.version( "0.0.0" )
+	.option( "--lambda-name [name]", "The name to give the new Lambda" )
+	.parse( process.argv );
+
+process.env.COLLY__LAMBDA_NAME = program.args[ 0 ];
+
+const initLambda = require( "../lib/init-lambda" )
+
+initLambda()
+	.then( console.log )
+	.catch( console.log );
