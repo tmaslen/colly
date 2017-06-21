@@ -1,8 +1,8 @@
 {
 	"memorySize": 128,
-	"name": "",
+	"name": "test-init-lambda",
 	"description": "",
-	"handler": "queueWorker/index.handler",
+	"handler": "test-init-lambda/index.handler",
 	"runtime": "nodejs6.10",
 	"timeout": 3,
 	"userDefinedCodeToDeploy": [],	
