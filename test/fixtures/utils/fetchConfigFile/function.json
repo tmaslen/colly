@@ -1,0 +1,4 @@
+{
+	"name": "fetchConfigFile",
+	"handler": "fetchConfigFile/index.handler"
+}

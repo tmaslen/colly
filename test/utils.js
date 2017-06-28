@@ -6,9 +6,13 @@ const utils = require( "../lib/utils" );
 
 describe( "colly utils", () => {
 
+	afterEach( () => {
+		process.env.COLLY__PROJECT_DIR = "";
+	});
+
 	it( "should list all of the available config files", () => {
 
-		process.env.COLLY_PROJECT_DIR = `./test/fakeProjectDirectory`;
+		process.env.COLLY__PROJECT_DIR = `./test/fakeProjectDirectory`;
 		const expectedList = {
 			"live": "colly.json",
 			"test": "colly.test.json"
@@ -23,6 +27,21 @@ describe( "colly utils", () => {
 		expect( utils.chooseProjectFile( { "test": "colly.test.json" }, "test" ) ).to.equal( "colly.test.json" );
 
 	});
+
+	it( "should fetch the correct project config file", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fakeProjectDirectory";
+		process.env.ENV = "live";
+
+		const expected = {
+			"environmentVariables": {
+				"env": "live"
+			}
+		};
+
+		expect( utils.getProjectConfig() ).to.deep.equal( expected );
+
+	} );
 
 	it( "should set the AWS profile for authentication", () => {
 
@@ -67,5 +86,44 @@ describe( "colly utils", () => {
 		expect( process.env.LAR ).to.equal( "car" );
 
 	});
+
+	it( "should return the path to the lambda config file", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
+
+		expect( utils.getLambdaConfigFilePath() ).to.equal( "./test/fixtures/utils/fetchConfigFile/function.json" );
+
+	});
+
+	it( "should return fetch the lambda config", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
+
+		const expectedConfigFile = {
+			"name": "fetchConfigFile",
+			"handler": "fetchConfigFile/index.handler"
+		}
+
+		expect( utils.getLambdaConfigFile() ).to.deep.equal( expectedConfigFile );
+
+	});
+
+	it( "should return the lambda handler name", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
+
+		expect( utils.getLambdaHandlerName() ).to.equal( "handler" );
+
+	} );
+
+	it( "should return the path to the lambda file", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
+		expect( utils.getLambdaFilePath() ).to.equal( "./test/fixtures/utils/fetchConfigFile/index.js" );
+	} );
 
 });

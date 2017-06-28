@@ -1,0 +1,12 @@
+{
+	"memorySize": 128,
+	"name": "myLambda",
+	"description": "",
+	"handler": "myLambda/index.handler",
+	"runtime": "nodejs6.10",
+	"timeout": 3,
+	"userDefinedCodeToDeploy": [],	
+    "deployedAssets": {
+ 	    "live": {}
+    }
+}

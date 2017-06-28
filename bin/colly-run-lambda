@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+const program = require( "commander" );
+
+console.log( "Running lambda..." );
+
+program
+	.version( "0.0.0" )
+	.option( "--name [name]", "STRING - The name of the Lambda to run" )
+	.option( "--event [name]", "STRING - (Default: undefined) - An event object to pass to the Lambda" )
+	.option( "--env [name]", "STRING (Default: live) - The environment you want to run in", "live" )
+	.option( "--local", "BOOLEAN (Default: false) Run the local version of the Lambda" )
+	.parse( process.argv );
+
+process.env.ENV                      = program.env;
+process.env.COLLY__LAMBDA_NAME       = program.name;
+process.env.COLLY__LAMBDA_EVENT_FILE = program.event || undefined;
+process.env.COLLY__RUN_LAMBDA_LOCAL  = program.local || false;
+
+require( "../lib/run-lambda" ).init();
