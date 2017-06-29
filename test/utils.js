@@ -126,4 +126,11 @@ describe( "colly utils", () => {
 		expect( utils.getLambdaFilePath() ).to.equal( "./test/fixtures/utils/fetchConfigFile/index.js" );
 	} );
 
+	it( "should return the path to the lambda file with an offset", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
+		expect( utils.getLambdaFilePath( "offset/dir") ).to.equal( "./test/fixtures/utils/offset/dir/fetchConfigFile/index.js" );
+	} );
+
 });
