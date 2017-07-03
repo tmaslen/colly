@@ -23,6 +23,25 @@ You can pass the Lambda an event object (use a JSON file in your project directo
 colly run-lambda --name <NAME_OF_LAMBDA> --local --event <RELATIVE_PATH_TO_JSON_FILE>
 ```
 
+### Deploy a lambda
+
+```
+colly deploy-lambda --name <NAME_OF_LAMBDA> --aws_profile <AWS_PROFILE_NAME>
+```
+
+### Run a deployed lambda from the CLI
+
+```
+colly run-lambda --name <NAME_OF_LAMBDA>
+```
+
+You can pass the deployed Lambda an event object (use a JSON file in your project directory):
+
+```
+colly run-lambda --name <NAME_OF_LAMBDA> --event <RELATIVE_PATH_TO_JSON_FILE>
+```
+
+
 ## Developing
 
 Configuration is done with environment variables. To run a node module directly (rather than via the commands in the `bin`) you need to set environment variables. Use this pattern:

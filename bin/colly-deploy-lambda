@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const program = require( "commander" );
+const utils   = require( "../lib/utils" );
+
+console.log( "Depoying lambda..." );
+
+program
+	.version( "0.0.0" )
+	.option( "--name [name]", "STRING - The name of the Lambda to deploy" )
+	.option( "--env [name]", "STRING (Default: live) - The environment you want to run in", "live" )
+	.option( "--aws_profile [name]", "STRING - (Default: undefined) - The AWS profile name to use for interacting with AWS" )
+	.option( "--use_bastion", "BOOLEAN (Default: false) Flag to tell Colly to authenticate you against a bastion service before interacting with AWS" )
+	.parse( process.argv );
+
+utils.setOptions( program );
+
+require( "../lib/deploy-lambda" )();
