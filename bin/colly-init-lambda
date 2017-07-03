@@ -6,7 +6,7 @@ console.log( "Initialising a new lambda..." );
 
 program
 	.version( "0.0.0" )
-	.option( "--lambda-name [name]", "The name to give the new Lambda" )
+	.option( "--name [name]", "The name to give the new Lambda" )
 	.parse( process.argv );
 
 console.log( program.args );

@@ -1,6 +1,8 @@
 const expect = require( "chai" ).expect;
 const assert = require( "chai" ).assert;
-const fs     = require('fs-extra')
+const AWS    = require( "aws-sdk" );
+const sinon  = require( "sinon" );
+const fs     = require( "fs" );
 
 const utils = require( "../lib/utils" );
 
@@ -43,12 +45,27 @@ describe( "colly utils", () => {
 
 	} );
 
-	it( "should set the AWS profile for authentication", () => {
+	it( "should correctly set options based on the command line params and the config file", () => {
 
-		utils.authenticate( { "aws_profile": "fakeProfile" } );
-		expect( process.env.AWS_PROFILE ).to.equal( "fakeProfile" );
+		const cliOptions = {
+			"env":         "live",
+			"name":        "myLambda",
+			"event":       "ref/to/event/file.json",
+			"local":       true,
+			"use_bastion": true,
+			"aws_profile": "myAwsProfileName"
+		};
 
-	} );
+		utils.setOptions( cliOptions );
+
+		expect( process.env.ENV ).to.equal( cliOptions.env );
+		expect( process.env.COLLY__LAMBDA_NAME ).to.equal( cliOptions.name );
+		expect( process.env.COLLY__LAMBDA_EVENT_FILE ).to.equal( cliOptions.event );
+		expect( process.env.COLLY__RUN_LAMBDA_LOCAL ).to.equal( cliOptions.local.toString() );
+		expect( process.env.COLLY__USE_BASTION ).to.equal( cliOptions.use_bastion.toString() );
+		expect( process.env.AWS_PROFILE ).to.equal( cliOptions.aws_profile );
+
+	});
 
 	it( "should return all the characters after the last dot in a string", () => {
 
@@ -132,5 +149,37 @@ describe( "colly utils", () => {
 		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
 		expect( utils.getLambdaFilePath( "offset/dir") ).to.equal( "./test/fixtures/utils/offset/dir/fetchConfigFile/index.js" );
 	} );
+
+	it( "should set the AWS region property", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.ENV = "LIVE";
+		utils.setAwsRegion();
+		expect( AWS.config.region ).to.equal( "eu-west-1" );
+
+	} );
+
+	it( "should add a new value to the project config", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.ENV = "LIVE";
+		const stubbedWriteFileSync = sinon.stub( fs, "writeFileSync" );
+		const expectedResult = {
+			"name": "fetchConfigFile",
+			"handler": "fetchConfigFile/index.handler",
+			"test": {
+				"foo": {
+					"bar": "test value"
+				}
+			}
+		};
+
+
+		utils.addValueToLambdaConfig( "test.foo.bar", "test value" );
+		expect( JSON.parse( stubbedWriteFileSync.getCall(0).args[1] ) ).to.deep.equal( expectedResult );
+
+		fs.writeFileSync.restore();
+
+	})
 
 });
