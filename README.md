@@ -55,3 +55,17 @@ For example...
 ```
 env COLLY__PROJECT_DIR="./test/fixtures/deploy-lambda" ENV="live" node lib/deploy-lambda
 ```
+
+## Testing
+
+There are unit tests that can be ran with this command...
+
+```
+npm test
+```
+
+Some of the tasks need to be manually tested. Here are command examples of running these...
+
+```
+env COLLY__PROJECT_DIR="/<LOCAL_PATH_TO_PROJECT_DIR>/colly/test/fixtures/deploy-lambda" npm run colly deploy-lambda -- --name myLambda --aws_profile colly_tester
+```
