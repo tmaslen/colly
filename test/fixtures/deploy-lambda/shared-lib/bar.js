@@ -1,3 +1,2 @@
-const _ = require( "lodash" );
+// const _ = require( "lodash" );
 console.log( "bar" );
-console.log( _ );
