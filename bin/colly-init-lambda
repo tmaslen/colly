@@ -11,7 +11,7 @@ program
 
 console.log( program.args );
 
-process.env.COLLY__LAMBDA_NAME = program.args[ 0 ];
+process.env.COLLY__LAMBDA_NAME = program.name;
 
 const initLambda = require( "../lib/init-lambda" )
 
