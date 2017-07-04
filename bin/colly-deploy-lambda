@@ -3,7 +3,7 @@
 const program = require( "commander" );
 const utils   = require( "../lib/utils" );
 
-console.log( "Depoying lambda..." );
+console.log( "Deploying lambda..." );
 
 program
 	.version( "0.0.0" )
