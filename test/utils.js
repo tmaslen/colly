@@ -38,6 +38,12 @@ describe( "colly utils", () => {
 
 	});
 
+	it( "should default the config file to live when no env is set", () => {
+
+		expect( utils.chooseProjectFile( { "live": "colly.json" }, "" ) ).to.equal( "colly.json" );
+		
+	});
+
 	it( "should choose the correct config file to use", () => {
 
 		expect( utils.chooseProjectFile( { "test": "colly.test.json" }, "test" ) ).to.equal( "colly.test.json" );
@@ -61,6 +67,8 @@ describe( "colly utils", () => {
 
 	it( "should correctly set options based on the command line params and the config file", () => {
 
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		stub = stubObjectWithReturnValue( fs, "readFileSync", "{}" );
 		const cliOptions = {
 			"env":         "live",
 			"name":        "myLambda",
@@ -78,6 +86,8 @@ describe( "colly utils", () => {
 		expect( process.env.COLLY__RUN_LAMBDA_LOCAL ).to.equal( cliOptions.local.toString() );
 		expect( process.env.COLLY__USE_BASTION ).to.equal( cliOptions.use_bastion.toString() );
 		expect( process.env.AWS_PROFILE ).to.equal( cliOptions.aws_profile );
+
+		stub.restore();
 
 	});
 
@@ -196,5 +206,38 @@ describe( "colly utils", () => {
 		fs.writeFileSync.restore();
 
 	});
+
+	it( "should reformat the config file to make it compatible with the CLI options object", () => {
+
+		const configObject = {
+			"useBastion": true,
+			"awsProfile": true,
+			"notWantedProperty": true
+		}
+		const reformatedObject = {
+			"use_bastion": true,
+			"aws_profile": true
+		}
+
+		expect( utils.formatConfigFile( configObject ) ).to.deep.equal( reformatedObject );
+
+	})
+
+	it( "should use settings defined in the config file", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.ENV = "LIVE";
+		const fakeConfig = {
+			"useBastion": true
+		}
+
+		const stubbedReadFileSync = stubObjectWithReturnValue( fs, "readFileSync", JSON.stringify( fakeConfig ) );
+
+		utils.setOptions( {} );
+
+		expect( process.env.COLLY__USE_BASTION ).to.equal( "true" );
+
+		stubbedReadFileSync.restore();
+	} );
 
 });
