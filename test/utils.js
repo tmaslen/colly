@@ -6,10 +6,24 @@ const fs     = require( "fs" );
 
 const utils = require( "../lib/utils" );
 
+function stubObjectWithReturnValue( object, method, returnValue ) {
+	const stub = sinon.stub( object, method );
+	stub.returns( returnValue );
+	return stub;
+}
+
 describe( "colly utils", () => {
 
 	afterEach( () => {
-		process.env.COLLY__PROJECT_DIR = "";
+
+		process.env.ENV                      = "";
+		process.env.COLLY__LAMBDA_NAME       = "";
+		process.env.COLLY__LAMBDA_EVENT_FILE = "";
+		process.env.COLLY__RUN_LAMBDA_LOCAL  = "";
+		process.env.COLLY__PROJECT_DIR       = "";
+		process.env.AWS_PROFILE              = "";
+		process.env.COLLY__USE_BASTION       = "";
+
 	});
 
 	it( "should list all of the available config files", () => {
@@ -162,6 +176,7 @@ describe( "colly utils", () => {
 	it( "should add a new value to the project config", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
 		process.env.ENV = "LIVE";
 		const stubbedWriteFileSync = sinon.stub( fs, "writeFileSync" );
 		const expectedResult = {
@@ -180,6 +195,6 @@ describe( "colly utils", () => {
 
 		fs.writeFileSync.restore();
 
-	})
+	});
 
 });
