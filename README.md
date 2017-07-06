@@ -62,6 +62,10 @@ Here's an example with all the options you can define:
 		"endpoint": "<URL_TO_BASTION_SERVICE>",
 		"certPath": "<ABSOLUTE_PATH_TO_CERT>",
 		"cloudServicesRoot": "<ABSOLUTE_PATH_TO_ROOT_FILE>"
+	},
+	"vpcConfig": {
+		"SubnetIds": [ "<SUBNET_ID_1>", "<SUBNET_ID_2>" ], // Minimum of 2 subnets must be provided
+		"SecurityGroupIds": [ "SECURITY_GROUP_ID" ]
 	}
 }
 ```
