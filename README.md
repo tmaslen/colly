@@ -29,6 +29,10 @@ colly run-lambda --name <NAME_OF_LAMBDA> --local --event <RELATIVE_PATH_TO_JSON_
 colly deploy-lambda --name <NAME_OF_LAMBDA> --aws_profile <AWS_PROFILE_NAME>
 ```
 
+When deploying a lambda for the first time, a role will be created for it. This role will be similarly named as the lambda and will be given the `AWSLambdaBasicExecutionRole` action.
+
+If you want your lambda to access other AWS features and services beyond simple Lambda execution, you can create a custom policy and tell `colly` to assign this to the lambda's role at creation time. Add your custom policy ARN to the `colly.json` file using a property called `customRolePolicyArn`.
+
 ### Run a deployed lambda from the CLI
 
 ```
@@ -85,7 +89,8 @@ Here's an example with all the options you can define:
 		"SubnetIds": [ "<SUBNET_ID_1>", "<SUBNET_ID_2>" ], // Minimum of 2 subnets must be provided
 		"SecurityGroupIds": [ "SECURITY_GROUP_ID" ]
 	},
-	"kmsKeyArn": "<KMS_KEY_ARN>"
+	"kmsKeyArn": "<KMS_KEY_ARN>",
+	"customRolePolicyArn": "<POLICY_ARN>"
 }
 ```
 
