@@ -41,7 +41,7 @@ You can pass the deployed Lambda an event object (use a JSON file in your projec
 colly run-lambda --name <NAME_OF_LAMBDA> --event <RELATIVE_PATH_TO_JSON_FILE> --aws_profile <AWS_PROFILE_NAME>
 ```
 
-### Encrypt environment variables
+### Encrypting environment variables
 
 While its possible to encrypt environment variables when they are uploaded to AWS Lambda, using encrypted environment variables will mean your code will need to behave differently when running it locally compared to when its deployed. If you have data that you want to encrypt, then if its to be part of your repo you don't want it to be lying around unencrypted.
 
@@ -51,6 +51,12 @@ To enable this functionality you need to create a AWS KMS key and store it in yo
 
 ```
 colly encrypt-var --name <NAME_OF_ENV_VAR> --value <VALUE_OF_ENV_VAR> --aws_profile <AWS_PROFILE_NAME>
+```
+
+You can also get the encrypted values decrypted using this command:
+
+```
+colly decrypt-var --name <NAME_OF_ENV_VAR> --aws_profile <AWS_PROFILE_NAME>
 ```
 
 ### Config file

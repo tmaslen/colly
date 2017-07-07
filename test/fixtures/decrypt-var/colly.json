@@ -1,0 +1,7 @@
+{
+	"region": "eu-west-1",
+	"awsProfile": "colly_tester",
+	"environmentVariables": {
+		"foo": "AQICAHgTn+6mVZBfFNE3CmK4cBBPrxkTcZ6JDM3LGSWIL4SFJQGyjJjSEdyKgV9LWFTOuQMqAAAAYTBfBgkqhkiG9w0BBwagUjBQAgEAMEsGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMJkOfbgVxY49XrLs5AgEQgB5jpT2Zb/J6/rmco/OdSe11xsqxhsjTlalYowURuEY="
+	}
+}
