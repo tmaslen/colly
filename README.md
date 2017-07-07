@@ -41,6 +41,18 @@ You can pass the deployed Lambda an event object (use a JSON file in your projec
 colly run-lambda --name <NAME_OF_LAMBDA> --event <RELATIVE_PATH_TO_JSON_FILE> --aws_profile <AWS_PROFILE_NAME>
 ```
 
+### Encrypt environment variables
+
+While its possible to encrypt environment variables when they are uploaded to AWS Lambda, using encrypted environment variables will mean your code will need to behave differently when running it locally compared to when its deployed. If you have data that you want to encrypt, then if its to be part of your repo you don't want it to be lying around unencrypted.
+
+With this feature you can encrypt a value (for example an API key) and store it in your project config (the `colly.json` file) immediately without the unencrypted value ever being written into a file.
+
+To enable this functionality you need to create a AWS KMS key and store it in your `colly.json` file.
+
+```
+colly encrypt-var --name <NAME_OF_ENV_VAR> --value <VALUE_OF_ENV_VAR> --aws_profile <AWS_PROFILE_NAME>
+```
+
 ### Config file
 
 You can define configuration for colly using config files. By default colly will look for a `colly.json` file in the root of your project. You can also define a colly file for each work pipeline you want to setup.
@@ -66,7 +78,8 @@ Here's an example with all the options you can define:
 	"vpcConfig": {
 		"SubnetIds": [ "<SUBNET_ID_1>", "<SUBNET_ID_2>" ], // Minimum of 2 subnets must be provided
 		"SecurityGroupIds": [ "SECURITY_GROUP_ID" ]
-	}
+	},
+	"kmsKeyArn": "<KMS_KEY_ARN>"
 }
 ```
 

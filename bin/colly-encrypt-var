@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+const program = require( "commander" );
+const utils   = require( "../lib/utils" );
+
+program
+	.version( "0.0.0" )
+	.option( "--name [name]", "Environment variable name" )
+	.option( "--value [value]", "Value to encrypt" )
+	.option( "--aws_profile [name]", "STRING - (Default: undefined) - The AWS profile name to use for interacting with AWS" )
+	.option( "--use_bastion", "BOOLEAN (Default: false) Flag to tell Colly to authenticate you against a bastion service before interacting with AWS" )
+	.parse( process.argv );
+
+utils.setOptions( program );
+
+require( "../lib/encrypt-var" ).init( program.name, program.value );
