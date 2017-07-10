@@ -8,8 +8,9 @@ console.log( "Running lambda..." );
 program
 	.version( "0.0.0" )
 	.option( "--name [name]", "STRING - The name of the Lambda to run" )
-	.option( "--event [name]", "STRING - (Default: undefined) - An event object to pass to the Lambda" )
-	.option( "--env [name]", "STRING (Default: live) - The environment you want to run in", "live" )
+	.option( "--event [event]", "STRING - (Default: undefined) - An event object to pass to the Lambda" )
+	.option( "--context [context]", "STRING - (Default: undefined) - A context object to pass to the Lambda" )
+	.option( "--env [env]", "STRING (Default: live) - The environment you want to run in", "live" )
 	.option( "--local", "BOOLEAN (Default: false) Run the local version of the Lambda", true )
 	.option( "--aws_profile [name]", "STRING - (Default: undefined) - The AWS profile name to use for interacting with AWS" )
 	.option( "--use_bastion", "BOOLEAN (Default: false) Flag to tell Colly to authenticate you against a bastion service before interacting with AWS" )

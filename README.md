@@ -17,11 +17,13 @@ colly init-lambda --lambda_name <NAME_OF_LAMBDA>
 colly run-lambda --name <NAME_OF_LAMBDA> --local
 ```
 
-You can pass the Lambda an event object (use a JSON file in your project directory):
+You can pass the Lambda an event object (use a JSON file in your project directory) and a context object (use a JS file in your project directory):
 
 ```
-colly run-lambda --name <NAME_OF_LAMBDA> --local --event <RELATIVE_PATH_TO_JSON_FILE>
+colly run-lambda --name <NAME_OF_LAMBDA> --local --event <RELATIVE_PATH_TO_JSON_FILE> --context <RELATIVE_PATH_TO_JS_FILE>
 ```
+
+Note the context object will need to export an object literal.
 
 ### Deploy a lambda
 

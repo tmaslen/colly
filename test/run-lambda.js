@@ -1,5 +1,7 @@
 const expect = require( "chai" ).expect;
 const assert = require( "chai" ).assert;
+const sinon  = require( "sinon" );
+const fs     = require( "fs" );
 
 const runLambda = require( "../lib/run-lambda" );
 
@@ -17,6 +19,16 @@ describe( "colly run-lambda", () => {
 		expect( runLambda.getLambdaEventFile() ).to.deep.equal( expectedEvent );
 
 	} );
+
+	it( "should fetch the correct context file", ( done )=> {
+
+		process.env.COLLY__PROJECT_DIR = `${process.cwd()}/test`;
+		process.env.COLLY__LAMBDA_CONTEXT_FILE = "fixtures/run-lambda/basicContext.js";
+
+		expect( runLambda.getLambdaContextFile().done() ).to.deep.equal( "contents of done function" );
+		done();
+
+	});
 
 	it( "should work out whether to run the local or deployed version of the lambda", () => {
 
