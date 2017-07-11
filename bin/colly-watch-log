@@ -7,12 +7,11 @@ console.log( "Fetching the logs..." );
 
 program
 	.version( "0.0.0" )
-	.option( "--name [name]", "STRING - The name of the Lambda that is being logged" )
-	.option( "--env [name]", "STRING (Default: live) - The environment you want to run in", "live" )
-	.option( "--search [search]", "STRING - Optional string to search the logs for" )
+	.option( "--name [value]", "STRING - The name of the Lambda that is being logged", "" )
+	.option( "--env [value]", "STRING (Default: live) - The environment you want to run in", "live" )
+	.option( "--search [value]", "STRING - Optional string to search the logs for" )
 	.option( "--start_time [start_time]", "STRING (Default: undefined) - A date time to start your search from" )
 	.option( "--tail", "BOOLEAN (Default: false) - Watch the logs in real time", true )
-	.option( "--group_name [group_name]", "STRING - (Default: undefined) - Alternative name to the Lambda name to search Cloudwatch logs for." )
 	.option( "--aws_profile [name]", "STRING - (Default: undefined) - The AWS profile name to use for interacting with AWS" )
 	.option( "--use_bastion", "BOOLEAN (Default: false) Flag to tell Colly to authenticate you against a bastion service before interacting with AWS" )
 	.parse( process.argv );
