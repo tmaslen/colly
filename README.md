@@ -47,6 +47,39 @@ You can pass the deployed Lambda an event object (use a JSON file in your projec
 colly run-lambda --name <NAME_OF_LAMBDA> --event <RELATIVE_PATH_TO_JSON_FILE> --aws_profile <AWS_PROFILE_NAME>
 ```
 
+### Get logs from AWS
+
+Creating a log output for NodeJS running on AWS Lambda is very simple. Lambda will log any `console.log` (or even `console.trace` ) to AWS Cloudwatch logs. There is no setup required.
+
+However AWS Cloudwatch Logs batches all logs up into collections based on time. Scanning through these can be cumbersome as each batch has its own page in the AWS console.
+
+A better way to view the logs for your Lambda is to use the command `colly log-watch`. This will take all of your logs and display them in one place.
+
+Get the logs for the lambda:
+
+```
+colly watch-log --name myLambda --aws_profile colly_tester
+```
+
+Search the logs for a key word of phrase:
+
+```
+colly watch-log --name myLambda --aws_profile colly_tester --search error
+colly watch-log --name myLambda --aws_profile colly_tester --search "foo bar"
+```
+
+Tail logs:
+
+```
+colly watch-log --name myLambda --aws_profile colly_tester --search error --tail
+```
+
+Search from a moment in time:
+
+```
+colly watch-log --name myLambda --aws_profile colly_tester --search error --tail --start_time 2017-09-01
+```
+
 ### Encrypting environment variables
 
 While its possible to encrypt environment variables when they are uploaded to AWS Lambda, using encrypted environment variables will mean your code will need to behave differently when running it locally compared to when its deployed. If you have data that you want to encrypt, then if its to be part of your repo you don't want it to be lying around unencrypted.

@@ -9,4 +9,5 @@ program
   .command( "deploy-lambda [name] [env] [use_bastion] [aws_profile]", "Deploy a lambda" )
   .command( "encrypt-var [name] [value] [use_bastion] [aws_profile]", "Encrypt an environment variable using KMS" )
   .command( "decrypt-var [name] [use_bastion] [aws_profile]", "Decrypt an environment variable using KMS" )
+  .command( "watch-log [name] [search] [group_name] [start_time] [tail] [use_bastion] [aws_profile]", "Fetch and search Cloudwatch logs for a lambda" )
   .parse( process.argv );
