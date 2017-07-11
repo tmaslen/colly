@@ -98,6 +98,12 @@ You can also get the encrypted values decrypted using this command:
 colly decrypt-var --name <NAME_OF_ENV_VAR> --aws_profile <AWS_PROFILE_NAME>
 ```
 
+Use the `--env` flag to set which environment colly file you want to edit. For example:
+
+```
+colly encrypt-var --name <NAME_OF_ENV_VAR> --value <VALUE_OF_ENV_VAR> --env test
+```
+
 ### Config file
 
 You can define configuration for colly using config files. By default colly will look for a `colly.json` file in the root of your project. You can also define a colly file for each work pipeline you want to setup.
