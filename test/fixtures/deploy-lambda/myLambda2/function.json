@@ -1,0 +1,16 @@
+{
+ "memorySize": 128,
+ "name": "myLambda2",
+ "description": "",
+ "handler": "myLambda2/index.handler",
+ "runtime": "nodejs6.10",
+ "timeout": 3,
+ "userDefinedCodeToDeploy": [],
+ "apiGateway": true,
+ "deployedAssets": {
+  "live": {
+   "roleArn": "arn:aws:iam::550213415212:role/myLambda2Role",
+   "lambdaArn": "arn:aws:lambda:eu-west-1:550213415212:function:myLambda2"
+  }
+ }
+}
