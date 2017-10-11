@@ -3,7 +3,40 @@ Colly
 
 Another serverless framework for AWS Lambda and API Gateway.
 
-## Instructions
+## Installing
+
+Step 1: install colly locally.
+
+```
+npm install colly
+```
+
+Step 2: make colly easy to run using a shortcut in your project's `package.json` file.
+
+```
+// Example package.json file
+{
+	"scripts": {
+		"colly": "./node_modules/colly/bin/colly"
+	}
+}
+```
+
+Step 3: create a `colly.json` file in the root of your project. Make it a empty JSON object.
+
+```
+{}
+```
+
+Step 4: run colly.
+
+```
+npm run colly <COMMAND>
+```
+
+See a list of command instructions below.
+
+## Command instructions
 
 ### Init a new Lambda
 
