@@ -7,7 +7,7 @@
     "aws-sdk": "^2.78.0",
     "chai": "^4.0.2",
     "chalk": "^2.0.1",
-    "commander": "^2.9.0",
+    "commander": "2.9.0",
     "fs-extra": "^3.0.1",
     "globby": "^6.1.0",
     "lodash": "^4.17.4",
@@ -24,7 +24,8 @@
   },
   "scripts": {
     "colly": "bin/colly",
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha",
+    "install": ""
   },
   "contributors": [
     {
