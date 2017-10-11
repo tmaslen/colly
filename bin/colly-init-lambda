@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const program = require( "commander" );
+const utils   = require( "../lib/utils" );
 
 console.log( "Initialising a new lambda..." );
 
@@ -9,9 +10,7 @@ program
 	.option( "--name [name]", "The name to give the new Lambda" )
 	.parse( process.argv );
 
-console.log( program.args );
-
-process.env.COLLY__LAMBDA_NAME = program.name;
+utils.setOptions( program );
 
 const initLambda = require( "../lib/init-lambda" )
 
