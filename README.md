@@ -31,7 +31,7 @@ Step 3: create a `colly.json` file in the root of your project. Make it a empty 
 Step 4: run colly.
 
 ```
-npm run colly <COMMAND>
+npm run colly -- <COMMAND> --<PARAM_NAME> <PARAM_VALUE>
 ```
 
 See a list of command instructions below.
