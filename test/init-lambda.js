@@ -22,7 +22,10 @@ describe( "colly init-lambda", () => {
 
 	it( "should create a new directory with the right stuff in it", ( done ) => {
 
-		initLambda( "test-init-lambda" )
+		process.env.COLLY__LAMBDA_NAME = "test-init-lambda";
+		process.env.COLLY__PROJECT_DIR = process.cwd();
+
+		initLambda()
 			.then( ( response ) => {
 				expect( response ).to.equal( "Lambda \"test-init-lambda\" created!" );
 				expect( getFile( `${newLambdaPath}/index.js`      ) ).to.equal( getFile( "./test/fixtures/init-lambda/index.js"      ) );
