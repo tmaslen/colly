@@ -5,13 +5,43 @@ Another serverless framework for AWS Lambda and API Gateway.
 
 ## Installing
 
-Step 1: install colly locally.
+Step 1: Create an AWS IAM role for colly to use when running. Give the role the following policy document:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "iam:AttachRolePolicy",
+                "iam:CreateRole",
+                "iam:GetRole",
+                "iam:GetUser",
+                "iam:PassRole",
+                "lambda:CreateFunction",
+                "lambda:GetFunction",
+                "lambda:InvokeFunction",
+                "lambda:ListFunctions",
+                "lambda:UpdateFunctionCode",
+                "lambda:UpdateFunctionConfiguration",
+                "logs:DescribeLogStreams",
+                "logs:FilterLogEvents",
+                "sts:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+Step 2: install colly locally.
 
 ```
 npm install colly
 ```
 
-Step 2: make colly easy to run using a shortcut in your project's `package.json` file.
+Step 3: make colly easy to run using a shortcut in your project's `package.json` file.
 
 ```
 // Example package.json file
@@ -22,13 +52,15 @@ Step 2: make colly easy to run using a shortcut in your project's `package.json`
 }
 ```
 
-Step 3: create a `colly.json` file in the root of your project. Make it a empty JSON object.
+Step 4: create a `colly.json` file in the root of your project. To begin with all you need to reference is the name of the IAM policy you created in the step above:
 
 ```
-{}
+{
+	"awsProfile": "collyRunner"
+}
 ```
 
-Step 4: run colly.
+Step 5: run colly.
 
 ```
 npm run colly -- <COMMAND> --<PARAM_NAME> <PARAM_VALUE>
@@ -57,6 +89,8 @@ colly run-lambda --name <NAME_OF_LAMBDA> --local --event <RELATIVE_PATH_TO_JSON_
 ```
 
 Note the context object will need to export an object literal.
+
+When running a lambda locally, colly will attempt to assume the lambda's IAM role. This will enable the lambda to run with the same permissions locally as when it is ran from AWS.
 
 ### Deploy a lambda
 
