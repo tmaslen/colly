@@ -100,7 +100,15 @@ colly deploy-lambda --name <NAME_OF_LAMBDA> --aws_profile <AWS_PROFILE_NAME>
 
 When deploying a lambda for the first time, a role will be created for it. This role will be similarly named as the lambda and will be given the `AWSLambdaBasicExecutionRole` action.
 
-If you want your lambda to access other AWS features and services beyond simple Lambda execution, you can create a custom policy and tell `colly` to assign this to the lambda's role at creation time. Add your custom policy ARN to the `colly.json` file using a property called `customRolePolicyArn`.
+By default your Lambda will run with the absolute minimum AWS privileges a Lambda is given (`AWSLambdaBasicExecutionRole`). If you want your Lambda to access any additional AWS services then you need to create an [IAM Policy]() and provide Colly with its ARN value.
+
+Add the policy ARN value to the Lambda function config file using the property `customRolePolicyArn`, for example:
+
+```
+{
+    "customRolePolicyArn": "arn:aws:iam::777788889999:policy/myCustomPolicy"
+}
+```
 
 ### Run a deployed lambda from the CLI
 
@@ -198,7 +206,24 @@ Here's an example with all the options you can define:
 		"SecurityGroupIds": [ "SECURITY_GROUP_ID" ]
 	},
 	"kmsKeyArn": "<KMS_KEY_ARN>",
-	"customRolePolicyArn": "<POLICY_ARN>"
+	"customRolePolicyArn": "<POLICY_ARN>",
+    "additionalDeploymentAssets": [ <ARRAY OF ADDITIONAL FILES TO DEPLOY]
+}
+```
+
+#### `additionalDeploymentAssets`
+
+By default Colly will create a module tree of all the requires Node modules (NodeJS files that are required in from other NodeJS files) and deploy them when you run the `deploy-lambda` command. Sometimes your Lambda may depend on files that are not referenced using the `require` command which will not be picked up by Colly.
+
+To ensure Colly does deploy these additional assets, you can reference them in the config file. Create a property called `additionalDeploymentAssets` in the config file, use this to define an array of additional asssets for deployments. These should be relative paths from the base of your project. For example:
+
+```
+{
+    "additionalDeploymentAssets": [
+        "package.json",
+        "data/dataFile.json",
+        "textFiles/fileFullOfText.txt"
+    ]
 }
 ```
 
