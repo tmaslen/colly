@@ -1,6 +1,6 @@
 {
   "name": "colly",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Another serverless framework for AWS Lambda and API Gateway",
   "main": "./lib/index.js",
   "dependencies": {
@@ -16,7 +16,7 @@
     "request": "^2.81.0",
     "webpack": "^3.0.0",
     "ncp": "^2.0.0",
-    "makedir": "^1.1.0"
+    "make-dir": "^1.1.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",
