@@ -1,6 +1,6 @@
 {
   "name": "colly",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "Another serverless framework for AWS Lambda and API Gateway",
   "main": "./lib/index.js",
   "dependencies": {
@@ -16,7 +16,8 @@
     "request": "^2.81.0",
     "webpack": "^3.0.0",
     "ncp": "^2.0.0",
-    "make-dir": "^1.1.0"
+    "make-dir": "^1.1.0",
+    "del": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",
@@ -42,5 +43,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tmaslen/colly"
-  }
+  },
+  "keywords": [
+    "lambda",
+    "serverless",
+    "cli"
+  ]
 }
