@@ -102,7 +102,7 @@ When deploying a lambda for the first time, a role will be created for it. This 
 
 By default your Lambda will run with the absolute minimum AWS privileges a Lambda is given (`AWSLambdaBasicExecutionRole`). If you want your Lambda to access any additional AWS services then you need to create an [IAM Policy]() and provide Colly with its ARN value.
 
-Add the policy ARN value to the Lambda function config file using the property `customRolePolicyArn`, for example:
+Add the policy ARN value to the `colly.json` file or the Lambda function config file using the property `customRolePolicyArn`. The value in the Lambda function file will take precedence. For example:
 
 ```
 {
