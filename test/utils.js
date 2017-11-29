@@ -240,4 +240,13 @@ describe( "colly utils", () => {
 		stubbedReadFileSync.restore();
 	} );
 
+	it( "pathToOtherModule function", () => {
+
+		expect( utils.pathToOtherModule( "node_modules/async/index.js", "package.json" ) ).to.equal( "node_modules/async/package.json" );
+		expect( utils.pathToOtherModule( "node_modules/async/lib/index.js", "package.json" ) ).to.equal( "node_modules/async/package.json" );
+		expect( utils.pathToOtherModule( "node_modules/async/node_modules/abc/index.js", "package.json" ) ).to.equal( "node_modules/async/node_modules/abc/package.json" );
+		expect( utils.pathToOtherModule( "node_modules/async/node_modules/abc/bin/index.js", "package.json" ) ).to.equal( "node_modules/async/node_modules/abc/package.json" );
+
+	});
+
 });
