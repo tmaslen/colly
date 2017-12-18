@@ -109,11 +109,21 @@ describe( "colly utils", () => {
 
 	it( "should return the lambda name in relation to the environment (e.g. live, test )", () => {
 
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+
 		process.env.ENV = "live";
 		expect( utils.getLambdaName( "fakeLambdaName" ) ).to.equal( "fakeLambdaName" );
 
 		process.env.ENV = "test";
 		expect( utils.getLambdaName( "fakeLambdaName" ) ).to.equal( "fakeLambdaNameTEST" );
+
+	});
+
+	it( "should format the name according to the property in the colly.json file", () => {
+
+		process.env.ENV = "test";
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		expect( utils.getLambdaName( "fakeName", "nameSpace__${env}--${name}" ) ).to.equal( "nameSpace__TEST--fakeName" );
 
 	});
 

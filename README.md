@@ -213,7 +213,8 @@ Here's an example with all the options you can define:
 	},
 	"kmsKeyArn": "<KMS_KEY_ARN>",
 	"customRolePolicyArn": "<POLICY_ARN>",
-    "additionalDeploymentAssets": [ <ARRAY OF ADDITIONAL FILES TO DEPLOY]
+    "additionalDeploymentAssets": [ <ARRAY OF ADDITIONAL FILES TO DEPLOY],
+    "nameTemplate": "${name}--TEST"
 }
 ```
 
