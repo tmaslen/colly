@@ -13,15 +13,21 @@ Step 1: Create an AWS IAM role for colly to use when running. Give the role the 
     "Statement": [
         {
             "Action": [
+                "events:DeleteRule",
+                "events:PutRule",
+                "events:PutTargets",
+                "events:RemoveTargets",
                 "iam:AttachRolePolicy",
                 "iam:CreateRole",
                 "iam:GetRole",
                 "iam:GetUser",
                 "iam:PassRole",
+                "lambda:AddPermission",
                 "lambda:CreateFunction",
                 "lambda:GetFunction",
                 "lambda:InvokeFunction",
                 "lambda:ListFunctions",
+                "lambda:RemovePermission",
                 "lambda:UpdateFunctionCode",
                 "lambda:UpdateFunctionConfiguration",
                 "logs:DescribeLogStreams",

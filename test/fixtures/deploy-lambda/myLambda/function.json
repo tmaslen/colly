@@ -6,10 +6,12 @@
  "runtime": "nodejs6.10",
  "timeout": 3,
  "userDefinedCodeToDeploy": [],
+ "eventSchedule": "cron(0 20 * * ? *)",
  "deployedAssets": {
   "live": {
-   "roleArn": "arn:aws:iam::550213415212:role/myLambdaRole",
-   "lambdaArn": "arn:aws:lambda:eu-west-1:550213415212:function:myLambda"
+   "lambdaArn": "arn:aws:lambda:eu-west-1:550213415212:function:myLambda",
+   "myLambdaRoleArn": "arn:aws:lambda:eu-west-1:550213415212:function:myLambda",
+   "ruleArn": "myLambdaRule"
   }
  }
 }

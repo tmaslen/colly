@@ -1,14 +1,18 @@
 const expect = require( "chai" ).expect;
 const assert = require( "chai" ).assert;
+const AWS    = require( "aws-sdk" );
+const sinon  = require( "sinon" );
 
 process.env.ENV = "live";
+const utils = require( "../lib/utils" );
 const updateLambda = require( "../lib/deploy-lambda/updateLambda" );
+const scheduledEvent = require( "../lib/deploy-lambda/scheduledEvent" );
 
 describe( "colly deploy-lambda", () => {
 
-	describe( "Configuring the Lambda", () => {
+	describe( "updateLambda.js", () => {
 
-		describe( "configShouldBeUpdated, Environment variables", () => {
+		describe( "configShouldBeUpdated function, Environment variables", () => {
 
 
 			it( "Should return FALSE when there are no environment variables", () => {

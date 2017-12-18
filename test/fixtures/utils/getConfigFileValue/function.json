@@ -1,0 +1,7 @@
+{
+	"deployedAssets": {
+		"test": {
+			"roleArn": "arn:aws:iam::0123456789:role/roleName"
+		}
+	}
+}

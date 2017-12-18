@@ -183,7 +183,7 @@ describe( "colly utils", () => {
 
 	} );
 
-	it( "should add a new value to the project config", () => {
+	it( "should ADD a value to the project config", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
 		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
@@ -204,6 +204,36 @@ describe( "colly utils", () => {
 		expect( JSON.parse( stubbedWriteFileSync.getCall(0).args[1] ) ).to.deep.equal( expectedResult );
 
 		fs.writeFileSync.restore();
+
+	});
+
+	it( "should REMOVE a value from the project config", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "removeValueFromLambdaConfig";
+		process.env.ENV = "LIVE";
+		const stubbedWriteFileSync = sinon.stub( fs, "writeFileSync" );
+		const expectedResult = {
+			"foo": {
+				"bar": {}
+			}
+		};
+
+
+		utils.removeValueFromLambdaConfig( "foo.bar.name" );
+		expect( JSON.parse( stubbedWriteFileSync.getCall(0).args[1] ) ).to.deep.equal( expectedResult );
+
+		fs.writeFileSync.restore();
+
+	});
+
+	it( "should GET a value from the project config", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.COLLY__LAMBDA_NAME = "getConfigFileValue";
+
+		expect( utils.getValueFromLambdaConfig( "deployedAssets.test.roleArn" ) ).to.equal( "arn:aws:iam::0123456789:role/roleName" );
+		expect( utils.getValueFromLambdaConfig( "deployedAssets.live.roleArn" ) ).to.equal( undefined );
 
 	});
 
