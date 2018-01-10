@@ -220,9 +220,9 @@ Here's an example with all the options you can define:
 
 #### `additionalDeploymentAssets`
 
-By default Colly will create a module tree of all the requires Node modules (NodeJS files that are required in from other NodeJS files) and deploy them when you run the `deploy-lambda` command. Sometimes your Lambda may depend on files that are not referenced using the `require` command which will not be picked up by Colly.
+By default Colly will create a module tree of all the Node modules (NodeJS files that are required in from other NodeJS files) that are required in your codebase and deploy them when you run the `deploy-lambda` command (this is done via webpack's static analysis feature). If your Lambda depends on a file that is not referenced using Node's `require` command, it will not automatically be deployed.
 
-To ensure Colly does deploy these additional assets, you can reference them in the config file. Create a property called `additionalDeploymentAssets` in the config file, use this to define an array of additional asssets for deployments. These should be relative paths from the base of your project. For example:
+To ensure Colly does deploy these additional files, you can reference them directly in either the config file (at the root of your project) or via each lambda's `function.json` file. Create a property called `additionalDeploymentAssets` in either of these files, use this to define an array of additional asssets for deployments. These should be relative paths from the base of your project. For example:
 
 ```
 {
@@ -233,6 +233,8 @@ To ensure Colly does deploy these additional assets, you can reference them in t
     ]
 }
 ```
+
+If you have this property defined in both a project config file and a lambda file, colly will merge both property values together and deploy all the assets referenced in both lists.
 
 ## Developing
 
