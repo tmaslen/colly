@@ -3,7 +3,7 @@ const assert = require( "chai" ).assert;
 const AWS    = require( "aws-sdk" );
 const sinon  = require( "sinon" );
 
-process.env.ENV = "live";
+process.env.LAMBDA__ENV = "live";
 const utils = require( "../lib/utils" );
 const updateLambda = require( "../lib/deploy-lambda/updateLambda" );
 const scheduledEvent = require( "../lib/deploy-lambda/scheduledEvent" );

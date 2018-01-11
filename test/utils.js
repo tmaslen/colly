@@ -16,7 +16,7 @@ describe( "colly utils", () => {
 
 	afterEach( () => {
 
-		process.env.ENV                      = "";
+		process.env.LAMBDA__ENV                      = "";
 		process.env.COLLY__LAMBDA_NAME       = "";
 		process.env.COLLY__LAMBDA_EVENT_FILE = "";
 		process.env.COLLY__RUN_LAMBDA_LOCAL  = "";
@@ -53,7 +53,7 @@ describe( "colly utils", () => {
 	it( "should fetch the correct project config file", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fakeProjectDirectory";
-		process.env.ENV = "live";
+		process.env.LAMBDA__ENV = "live";
 
 		const expected = {
 			"environmentVariables": {
@@ -80,7 +80,7 @@ describe( "colly utils", () => {
 
 		utils.setOptions( cliOptions );
 
-		expect( process.env.ENV ).to.equal( cliOptions.env );
+		expect( process.env.LAMBDA__ENV ).to.equal( cliOptions.env );
 		expect( process.env.COLLY__LAMBDA_NAME ).to.equal( cliOptions.name );
 		expect( process.env.COLLY__LAMBDA_EVENT_FILE ).to.equal( cliOptions.event );
 		expect( process.env.COLLY__RUN_LAMBDA_LOCAL ).to.equal( cliOptions.local.toString() );
@@ -99,10 +99,10 @@ describe( "colly utils", () => {
 
 	it( "should return the correct env name", () => {
 
-		process.env.ENV = "live";
+		process.env.LAMBDA__ENV = "live";
 		expect( utils.anyEnvButLive() ).to.equal( "" );
 
-		process.env.ENV = "test";
+		process.env.LAMBDA__ENV = "test";
 		expect( utils.anyEnvButLive() ).to.equal( "TEST" );
 
 	} );
@@ -111,17 +111,17 @@ describe( "colly utils", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
 
-		process.env.ENV = "live";
+		process.env.LAMBDA__ENV = "live";
 		expect( utils.getLambdaName( "fakeLambdaName" ) ).to.equal( "fakeLambdaName" );
 
-		process.env.ENV = "test";
+		process.env.LAMBDA__ENV = "test";
 		expect( utils.getLambdaName( "fakeLambdaName" ) ).to.equal( "fakeLambdaNameTEST" );
 
 	});
 
 	it( "should format the name according to the property in the colly.json file", () => {
 
-		process.env.ENV = "test";
+		process.env.LAMBDA__ENV = "test";
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
 		expect( utils.getLambdaName( "fakeName", "nameSpace__${env}--${name}" ) ).to.equal( "nameSpace__TEST--fakeName" );
 
@@ -187,7 +187,7 @@ describe( "colly utils", () => {
 	it( "should set the AWS region property", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
-		process.env.ENV = "LIVE";
+		process.env.LAMBDA__ENV = "LIVE";
 		utils.setAwsRegion();
 		expect( AWS.config.region ).to.equal( "eu-west-1" );
 
@@ -197,7 +197,7 @@ describe( "colly utils", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
 		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
-		process.env.ENV = "LIVE";
+		process.env.LAMBDA__ENV = "LIVE";
 		const stubbedWriteFileSync = sinon.stub( fs, "writeFileSync" );
 		const expectedResult = {
 			"name": "fetchConfigFile",
@@ -221,7 +221,7 @@ describe( "colly utils", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
 		process.env.COLLY__LAMBDA_NAME = "removeValueFromLambdaConfig";
-		process.env.ENV = "LIVE";
+		process.env.LAMBDA__ENV = "LIVE";
 		const stubbedWriteFileSync = sinon.stub( fs, "writeFileSync" );
 		const expectedResult = {
 			"foo": {
@@ -266,7 +266,7 @@ describe( "colly utils", () => {
 	it( "should use settings defined in the config file", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
-		process.env.ENV = "LIVE";
+		process.env.LAMBDA__ENV = "LIVE";
 		const fakeConfig = {
 			"useBastion": true
 		}
@@ -292,7 +292,7 @@ describe( "colly utils", () => {
 	it( "getListOfAdditionalDeploymentAssets", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
-		process.env.ENV = "LIVE";
+		process.env.LAMBDA__ENV = "LIVE";
 		process.env.COLLY__LAMBDA_NAME = "getListOfAdditionalDeploymentAssets";
 
 		expect( utils.getListOfAdditionalDeploymentAssets() ).to.deep.equal([

@@ -18,7 +18,7 @@ describe( "colly decrypt-var", () => {
 		stubbedDecrypt.callsArgWith( 1, null, { "Plaintext": "bar" } );
 
 		// Setup inputs
-		process.env.ENV = "live";
+		process.env.LAMBDA__ENV = "live";
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/decrypt-var";
 
 		// Assert

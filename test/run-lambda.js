@@ -42,7 +42,7 @@ describe( "colly run-lambda", () => {
 
 	it( "should run the lambda", ( done ) => {
 
-		process.env.ENV = "live";
+		process.env.LAMBDA__ENV = "live";
 		process.env.COLLY__LAMBDA_NAME = "myLambda";
 		process.env.COLLY__PROJECT_DIR = `${process.cwd()}/test/fixtures/run-lambda`;
 		process.env.COLLY__LAMBDA_EVENT_FILE = "basicMessage.json";

@@ -23,7 +23,7 @@ describe( "colly encrypt-var", () => {
 		stubbedEncrypt.callsArgWith( 1, null, { "CiphertextBlob": "encryptedBar" } );
 
 		// Setup inputs
-		process.env.ENV = "live";
+		process.env.LAMBDA__ENV = "live";
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/encrypt-var";
 
 		// Run method
