@@ -289,4 +289,17 @@ describe( "colly utils", () => {
 
 	});
 
+	it( "getListOfAdditionalDeploymentAssets", () => {
+
+		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
+		process.env.ENV = "LIVE";
+		process.env.COLLY__LAMBDA_NAME = "getListOfAdditionalDeploymentAssets";
+
+		expect( utils.getListOfAdditionalDeploymentAssets() ).to.deep.equal([
+			"foo.js",
+			"bar.js"
+		]);
+
+	});
+
 });
