@@ -19,7 +19,7 @@
     "make-dir": "^1.1.0",
     "del": "^3.0.0",
     "cp-file": "^5.0.0",
-    "path-type": "^3.0.0",
+    "path-type": "^3.0.0"
 
   },
   "devDependencies": {
