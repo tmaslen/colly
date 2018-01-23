@@ -14,6 +14,8 @@ Step 1: Create an AWS IAM role for colly to use when running. Give the role the 
         {
             "Action": [
                 "events:DeleteRule",
+                "events:ListRules",
+                "events:ListTargetsByRule",
                 "events:PutRule",
                 "events:PutTargets",
                 "events:RemoveTargets",
