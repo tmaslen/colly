@@ -16,7 +16,7 @@ describe( "colly utils", () => {
 
 	afterEach( () => {
 
-		process.env.LAMBDA__ENV                      = "";
+		process.env.LAMBDA__ENV              = "";
 		process.env.COLLY__LAMBDA_NAME       = "";
 		process.env.COLLY__LAMBDA_EVENT_FILE = "";
 		process.env.COLLY__RUN_LAMBDA_LOCAL  = "";
