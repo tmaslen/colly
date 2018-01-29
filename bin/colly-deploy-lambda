@@ -11,6 +11,7 @@ program
 	.option( "--env [name]", "STRING (Default: live) - The environment you want to run in", "live" )
 	.option( "--aws_profile [name]", "STRING - (Default: undefined) - The AWS profile name to use for interacting with AWS" )
 	.option( "--use_bastion", "BOOLEAN (Default: false) Flag to tell Colly to authenticate you against a bastion service before interacting with AWS" )
+	.option( "--dry_run", "BOOLEAN (Default: false) Flag to tell Colly to only create assets for deployment. Lambda will not actually be deployed")
 	.parse( process.argv );
 
 utils.setOptions( program );

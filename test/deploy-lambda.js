@@ -106,7 +106,7 @@ describe( "colly deploy-lambda", () => {
 
 			it( "Should perform a dry run when the `--dryrun` option is TRUE", () => {
 
-				process.env.COLLY__DEPLOY_DRY_RUN = true;
+				process.env.COLLY__DRY_RUN = true;
 				updateLambda.init();
 				expect( dryRun.called ).to.equal( true );
 				expect( wetRun.called ).to.equal( false );
@@ -115,7 +115,7 @@ describe( "colly deploy-lambda", () => {
 
 			it( "Should NOT perform a dry run when the `--dryrun` option is FALSE", () => {
 
-				process.env.COLLY__DEPLOY_DRY_RUN = false;
+				process.env.COLLY__DRY_RUN = false;
 				updateLambda.init();
 				expect( dryRun.called ).to.equal( false );
 				expect( wetRun.called ).to.equal( true );
