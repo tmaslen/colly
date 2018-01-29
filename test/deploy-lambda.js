@@ -74,6 +74,56 @@ describe( "colly deploy-lambda", () => {
 
 		});
 
+		describe( "--dryrun option", () => {
+
+			let dryRun;
+			let wetRun;
+
+			beforeEach( () => {
+
+				dryRun = sinon.stub( updateLambda, "dryRun" );
+				dryRun.returns( "DRY RUN" );
+				wetRun = sinon.stub( updateLambda, "wetRun" );
+				wetRun.returns( "WET RUN" );
+
+			});
+
+
+			afterEach( () => {
+
+				dryRun.restore();
+				wetRun.restore();
+
+			});
+
+			it( "Should have the default behaviour of deploying to AWS", () => {
+
+				updateLambda.init();
+				expect( dryRun.called ).to.equal( false );
+				expect( wetRun.called ).to.equal( true );
+
+			});
+
+			it( "Should perform a dry run when the `--dryrun` option is TRUE", () => {
+
+				process.env.COLLY__DEPLOY_DRY_RUN = true;
+				updateLambda.init();
+				expect( dryRun.called ).to.equal( true );
+				expect( wetRun.called ).to.equal( false );
+
+			});
+
+			it( "Should NOT perform a dry run when the `--dryrun` option is FALSE", () => {
+
+				process.env.COLLY__DEPLOY_DRY_RUN = false;
+				updateLambda.init();
+				expect( dryRun.called ).to.equal( false );
+				expect( wetRun.called ).to.equal( true );
+
+			});
+
+		});
+
 	});
 
 });
