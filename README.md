@@ -103,7 +103,7 @@ When running a lambda locally, colly will attempt to assume the lambda's IAM rol
 ### Deploy a lambda
 
 ```
-colly deploy-lambda --name <NAME_OF_LAMBDA> --aws_profile <AWS_PROFILE_NAME>
+colly deploy-lambda --name <NAME_OF_LAMBDA> [--aws_profile <AWS_PROFILE_NAME> --env --dry_run]
 ```
 
 When deploying a lambda for the first time, a role will be created for it. This role will be similarly named as the lambda and will be given the `AWSLambdaBasicExecutionRole` action.
@@ -117,6 +117,14 @@ Add the policy ARN value to the `colly.json` file or the Lambda function config 
     "customRolePolicyArn": "arn:aws:iam::777788889999:policy/myCustomPolicy"
 }
 ```
+
+#### --env
+
+Optional string value option. Use this option to state the environment name you want to associate with the Lambda (e.g. "dev", "test").
+
+#### --dry_run
+
+Add this option if you want Colly to create the assets for the Lambda deploy, but not actually push to the AWS Lambda service.  This is useful for debugging missing dependencies.
 
 ### Run a deployed lambda from the CLI
 
