@@ -5,6 +5,7 @@ const sinon  = require( "sinon" );
 
 process.env.LAMBDA__ENV = "live";
 const utils = require( "../lib/utils" );
+const createLambda = require( "../lib/deploy-lambda/createLambda" );
 const updateLambda = require( "../lib/deploy-lambda/updateLambda" );
 const scheduledEvent = require( "../lib/deploy-lambda/scheduledEvent" );
 
@@ -74,7 +75,7 @@ describe( "colly deploy-lambda", () => {
 
 		});
 
-		describe( "--dryrun option", () => {
+		describe( "--dryrun option when updating", () => {
 
 			let dryRun;
 			let wetRun;
@@ -117,6 +118,56 @@ describe( "colly deploy-lambda", () => {
 
 				process.env.COLLY__DRY_RUN = false;
 				updateLambda.init();
+				expect( dryRun.called ).to.equal( false );
+				expect( wetRun.called ).to.equal( true );
+
+			});
+
+		});
+
+		describe( "--dryrun option when creating", () => {
+
+			let dryRun;
+			let wetRun;
+
+			beforeEach( () => {
+
+				dryRun = sinon.stub( createLambda, "dryRun" );
+				dryRun.returns( "DRY RUN" );
+				wetRun = sinon.stub( createLambda, "wetRun" );
+				wetRun.returns( "WET RUN" );
+
+			});
+
+
+			afterEach( () => {
+
+				dryRun.restore();
+				wetRun.restore();
+
+			});
+
+			it( "Should have the default behaviour of deploying to AWS", () => {
+
+				createLambda.init();
+				expect( dryRun.called ).to.equal( false );
+				expect( wetRun.called ).to.equal( true );
+
+			});
+
+			it( "Should perform a dry run when the `--dryrun` option is TRUE", () => {
+
+				process.env.COLLY__DRY_RUN = true;
+				createLambda.init();
+				expect( dryRun.called ).to.equal( true );
+				expect( wetRun.called ).to.equal( false );
+
+			});
+
+			it( "Should NOT perform a dry run when the `--dryrun` option is FALSE", () => {
+
+				process.env.COLLY__DRY_RUN = false;
+				createLambda.init();
 				expect( dryRun.called ).to.equal( false );
 				expect( wetRun.called ).to.equal( true );
 
