@@ -14,6 +14,7 @@ program
 	.option( "--local", "BOOLEAN (Default: false) Run the local version of the Lambda", true )
 	.option( "--aws_profile [name]", "STRING - (Default: undefined) - The AWS profile name to use for interacting with AWS" )
 	.option( "--use_bastion", "BOOLEAN (Default: false) Flag to tell Colly to authenticate you against a bastion service before interacting with AWS" )
+	.option( "--dry_run", "BOOLEAN (Default: false) Flag to tell Colly to only create assets for deployment. Lambda will not actually be deployed" )
 	.parse( process.argv );
 
 program.local = program.local || false;

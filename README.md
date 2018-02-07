@@ -87,7 +87,7 @@ colly init-lambda --lambda_name <NAME_OF_LAMBDA>
 ### Run a lambda locally
 
 ```
-colly run-lambda --name <NAME_OF_LAMBDA> --local
+colly run-lambda --name <NAME_OF_LAMBDA> [--local --env --dry_run]
 ```
 
 You can pass the Lambda an event object (use a JSON file in your project directory) and a context object (use a JS file in your project directory):
@@ -99,6 +99,18 @@ colly run-lambda --name <NAME_OF_LAMBDA> --local --event <RELATIVE_PATH_TO_JSON_
 Note the context object will need to export an object literal.
 
 When running a lambda locally, colly will attempt to assume the lambda's IAM role. This will enable the lambda to run with the same permissions locally as when it is ran from AWS.
+
+#### --env
+
+Optional string value option. Use this option to state the environment name you want to associate with the Lambda (e.g. "dev", "test").
+
+#### --local
+
+Optional flag. Run the Lambda source files locally.
+
+#### --dry_run
+
+Optional flag. Run the Lambda source files that have been created ready to be deployed locally. This is useful to help you debug if your code runs locally but errors when ran from the Lambda service. Note: the code must have been deployed via the `deploy-lambda` code first.
 
 ### Deploy a lambda
 

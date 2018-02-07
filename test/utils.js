@@ -175,13 +175,35 @@ describe( "colly utils", () => {
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
 		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
 		expect( utils.getLambdaFilePath() ).to.equal( "./test/fixtures/utils/fetchConfigFile/index.js" );
+
 	} );
 
 	it( "should return the path to the lambda file with an alt start to path", () => {
 
 		process.env.COLLY__PROJECT_DIR = "./test/fixtures/utils";
 		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
-		expect( utils.getLambdaFilePath( "./offset/dir") ).to.equal( "./offset/dir/fetchConfigFile/index.js" );
+		expect( utils.getLambdaFilePath( "./offset/dir") ).to.equal( "./test/fixtures/utils/offset/dir/fetchConfigFile/index.js" );
+
+	} );
+
+	it( "prependToRelativeLambdaPath", () => {
+
+		process.env.COLLY__PROJECT_DIR = `${process.cwd()}/test/fixtures/utils`;
+		process.env.COLLY__LAMBDA_NAME = "fetchConfigFile";
+		expect( utils.prependToRelativeLambdaPath( "./offset/dir") ).to.equal( "./test/fixtures/utils/offset/dir/fetchConfigFile/index.js" );
+
+	} );
+
+	it( "addStagingDirIntoRelativeFilePath", () => {
+
+		const relativeFilePath = "test/fixtures/deploy-lambda/myLambda/index.js"
+		const expected         = "./test/fixtures/deploy-lambda/dist/myLambda/index.js";
+
+		process.env.COLLY__PROJECT_DIR = `${process.cwd()}/test/fixtures/deploy-lambda`;
+		process.env.COLLY__LAMBDA_NAME = "myLambda";
+
+		expect( utils.addStagingDirIntoRelativeFilePath( relativeFilePath ) ).to.equal( expected );
+
 	} );
 
 	it( "should set the AWS region property", () => {
